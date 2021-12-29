@@ -17,4 +17,4 @@ sloth代码自动生成
 
 
 
-![](https://github.com/jtzjtz/sloth/blob/main/%E6%88%AA%E5%9B%BE.png)
+![](https://github.com/jtzjtz/sloth/blob/main/jt.png)
