@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>sloth代码自动生成</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+</head>
+<body>
+
+<div class="layui-tab layui-tab-card">
+    <ul class="layui-tab-title">
+        <li class="layui-this">生成代码</li>
+        <li>配置模板</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form" action="" lay-filter="example">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">模板类型</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="type" value="1" title="java模板">
+                        <input type="radio" name="type" value="2" title="golang模板" checked>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">数据库Host</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="db_host" lay-verify="db_host" value="localhost" autocomplete="off"
+                               placeholder="请输入数据库地址 【必填】"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">数据库port</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="db_port" lay-verify="db_port" value="3306" autocomplete="off"
+                               placeholder="请输入db port 【必填】"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">数据库DB</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="db" lay-verify="db" autocomplete="off" placeholder="请输入db 【必填】"
+                               class="layui-input" value="hys_db">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">数据库User</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="db_user" lay-verify="root" value="root" autocomplete="off"
+                               placeholder="请输入db_user 【必填】"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">数据库password</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="db_pwd" value="123456" lay-verify="db_pwd" autocomplete="off"
+                               placeholder="请输入db_pwd 【必填】"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">数据表名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="tables" lay-verify="tables" autocomplete="off" value="department"
+                               placeholder="table1,table2,table3 默认空：所有表；【非必填】" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">git地址</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="git_url" lay-verify="git_url" autocomplete="off"
+                               placeholder="git.phpers.club/*/*【必填】"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">git账户</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="git_username" lay-verify="git_username" autocomplete="on"
+                               placeholder="请输入用户名【必填】"
+                               class="layui-input" value="">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">git密码</label>
+                    <div class="layui-input-block">
+                        <input type="password" name="git_password" placeholder="请输入密码 【必填】" value=""
+                               lay-verify="git_password"
+                               autocomplete="on" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">git版本号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="version" lay-verify="version" autocomplete="off"
+                               placeholder="v*.*.* 【必填】"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">git提交备注</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="git_msg" lay-verify="git_msg" autocomplete="on"
+                               placeholder="请输入 git commit msg【必填】" class="layui-input">
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+
+                        <button type="submit" class="layui-btn" id="save_btn" lay-submit="" lay-filter="demo1">提交
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="layui-tab-item">开发中...</div>
+    </div>
+</div>
+
+
+<script src="/layui/layui.js" charset="utf-8"></script>
+<script>
+    layui.extend({
+        admin: '{/}./js/admin'
+    });
+    layui.use(['form', 'layedit', 'jquery', 'element'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit;
+
+        //自定义验证规则
+        // form.verify({
+        //     db: function (value) {
+        //         if (value.length == 0) {
+        //             return '数据库名必填';
+        //         }
+        //     }
+        //     , git_password: [
+        //         /^[\S]{1,30}$/
+        //         , '密码必填，且不能出现空格'
+        //     ]
+        //     , git_username: function (value) {
+        //         if (value.length == 0) {
+        //             return '域账户必填';
+        //         }
+        //     }
+        //     , version: function (value) {
+        //         if (value.length == 0) {
+        //             return '版本号必填';
+        //         }
+        //     }
+        //     , git_url: function (value) {
+        //         if (value.length == 0) {
+        //             return 'Git地址必填';
+        //         }
+        //     }
+        //     , git_msg: function (value) {
+        //         if (value.length == 0) {
+        //             return '提交备注必填';
+        //         }
+        //     }
+        // });
+
+        // //监听指定开关
+        // form.on('switch(switchTest)', function (data) {
+        //     layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+        //         offset: '6px'
+        //     });
+        //     layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        // });
+
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            layui.jquery("#save_btn").addClass("layui-btn-disabled").attr("disabled", true).text("提交中");            // layui.jquery.ajax({
+            layui.jquery.ajax({
+                type: 'POST',
+                url: '/create',
+                data: data.field,
+                dataType: 'JSON',
+                success: function (result) {
+                    if (result.code == 1) {
+                        layer.alert(result.msg, {
+                            title: '执行成功'
+                        });
+                    } else {
+                        layer.alert(result.msg, {
+                            title: '执行出错'
+                        });
+                    }
+                    layui.jquery("#save_btn").removeClass("layui-btn-disabled").attr("disabled", false).text("提交");            // layui.jquery.ajax({
+
+
+                },
+                fail: function (result) {
+                    layer.alert(JSON.stringify(result), {
+                        title: '返回结果'
+                    });
+                    layui.jquery("#save_btn").removeClass("layui-btn-disabled").attr("disabled", false).text("提交");            // layui.jquery.ajax({
+                }
+            })
+            return false;
+        });
+
+
+    });
+</script>
+
+</body>
+</html>
