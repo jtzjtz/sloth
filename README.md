@@ -22,9 +22,9 @@ go get -u github.com/jtzjtz/ys_pack
 ```
 >>>>1.自动生成的包文件，[demo地址](https://github.com/jtzjtz/ys_pack)
 >
->>>>2.client：消费者，引入包即可使用[demo地址](https://github.com/jtzjtz/ys_server)
+>>>>2.client：消费者，引入包即可使用[demo地址](https://github.com/jtzjtz/ys_api)
 >
->>>>3.server：grpc服务提供者，引入包即可使用 [demo地址](https://github.com/jtzjtz/ys_api)
+>>>>3.server：grpc服务提供者，引入包即可使用 [demo地址](https://github.com/jtzjtz/ys_server)
 >
 
 
