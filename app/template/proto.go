@@ -1,6 +1,7 @@
 package template
 
 var ProtoTmpl = `syntax = "proto3";
+option go_package ="./;{{.TableName}}_proto";
 package {{.TableName}}_proto;
 // protoc -I ./{{.TableName}}_proto --go_out=plugins=grpc:./{{.TableName}}_proto ./{{.TableName}}_proto/{{.TableName}}_gen.proto
 service {{ .StructName}}Service {
