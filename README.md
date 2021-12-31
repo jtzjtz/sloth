@@ -6,7 +6,7 @@ sloth代码自动生成
 >>>>1.docker安装
 >
 ```dockerfile
-docker pull ghcr.io/jtzjtz/test:latest
+docker pull jtzjtz/sloth:latest
 ```
 >>>>2.源码安装[下载地址](https://github.com/jtzjtz/sloth)
 >
