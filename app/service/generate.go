@@ -21,11 +21,13 @@ import (
 	"text/template"
 )
 
-func Genrate(requestData entity.GenerateForm) entity.Result {
-	var result entity.Result
+func Genrate(requestData entity.GenerateForm) (result entity.Result) {
 	defer func() {
-		if err := recover(); err != nil {
-			result.SetMessage("get template error: " + err.(error).Error())
+		errGen := recover()
+		if errGen != nil {
+			fmt.Printf("genfile errr: %v", errGen)
+			result.SetCode(entity.CODE_ERROR)
+			result.SetMessage(fmt.Sprintf("genfile errr: %v", errGen))
 		}
 	}()
 	// Username is required
@@ -107,13 +109,6 @@ func Genrate(requestData entity.GenerateForm) entity.Result {
 
 	sqldbT := getTemplate(gtmpl.SqlDBTmpl)
 
-	defer func() {
-		errGen := recover()
-		if errGen != nil {
-			result.SetCode(entity.CODE_ERROR)
-			result.SetMessage(fmt.Sprintf("genfile errr: %s", errGen))
-		}
-	}()
 	genFile(filepath.Join(rootDir, "entity", "result.go"), dbmeta.ModelInfo{TransferChar: "`"}, resultT, "", true)
 	genFile(filepath.Join(rootDir, serviceDir, "dao", "sqldb.go"), nil, sqldbT, "", true)
 	// generate go files for each table

@@ -346,6 +346,11 @@ func sqlTypeToGoType(mysqlType string, nullable bool, gureguTypes bool) string {
 	return ""
 }
 func CreateModel(db *sql.DB, dbname string, tableName string, structName string, giturl string) *ModelInfo {
+	defer func() {
+		if er := recover(); er != nil {
+			panic(er)
+		}
+	}()
 	cols, _ := schema.Table(db, tableName)
 	fields := GenerateEnttyFields(cols, db, dbname, tableName)
 	protoFields := generateProtoFieldsTypes(db, cols, true)
