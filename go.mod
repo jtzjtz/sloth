@@ -1,6 +1,6 @@
 module sloth
 
-go 1.12
+go 1.14
 
 require (
 	github.com/denisenkom/go-mssqldb v0.0.0-20191124224453-732737034ffd
