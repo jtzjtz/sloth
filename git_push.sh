@@ -8,10 +8,10 @@ git commit  -m "$2"
 echo $3
 echo  $4
 
-git push https://$4
+git push https://$5:$6@$4
 
 git tag -a $3 -m "$2"
-git push  https://$4 --tags
+git push  https://$5:$6@$4 --tags
 
 echo "push 完成"
 
