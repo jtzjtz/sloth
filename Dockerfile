@@ -11,5 +11,5 @@ COPY ./app/resource/ /data/app/resource/
 
 RUN chmod +x /data/web-app
 WORKDIR /data/
-expose 8000
+EXPOSE 8000
 ENTRYPOINT ["./web-app"]
