@@ -78,7 +78,7 @@ func Genrate(requestData entity.GenerateForm) entity.Result {
 	println(er, outStr, erStr)
 
 	if er != nil {
-		return result.SetMessage(erStr + er.Error())
+		return result.SetMessage(fmt.Sprintf("%s ,%v", erStr, er))
 	}
 	result.SetMessage(outStr)
 
