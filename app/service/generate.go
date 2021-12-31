@@ -23,6 +23,11 @@ import (
 
 func Genrate(requestData entity.GenerateForm) entity.Result {
 	var result entity.Result
+	defer func() {
+		if err := recover(); err != nil {
+			result.SetMessage("get template error: " + err.(error).Error())
+		}
+	}()
 	// Username is required
 	sqlTable := requestData.Tabels
 	sqlType := "mysql"
@@ -76,7 +81,6 @@ func Genrate(requestData entity.GenerateForm) entity.Result {
 		return result.SetMessage(erStr + er.Error())
 	}
 	result.SetMessage(outStr)
-	println(er, outStr, erStr)
 
 	os.MkdirAll(filepath.Join(rootDir, protoDir), 0777)
 	os.MkdirAll(filepath.Join(rootDir, apiDir, "grpc"), 0777)
@@ -85,12 +89,6 @@ func Genrate(requestData entity.GenerateForm) entity.Result {
 	os.MkdirAll(filepath.Join(rootDir, serviceDir, "dao"), 0777)
 	os.MkdirAll(filepath.Join(rootDir, serviceDir, "service"), 0777)
 	os.MkdirAll(filepath.Join(rootDir, entityDir), 0777)
-
-	defer func() {
-		if err := recover(); err != nil {
-			result.SetMessage("get template error: " + err.(error).Error())
-		}
-	}()
 
 	modelT := getTemplate(gtmpl.ModelTmpl)
 
