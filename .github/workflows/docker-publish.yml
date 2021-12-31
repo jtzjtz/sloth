@@ -47,12 +47,12 @@ jobs:
         run: make build
 
       - name: 登陆 docker hub
-          if: success()
-          uses: actions-hub/docker/login@master
-          env:
-            DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-            DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-            GITHUB_SERVER_URL: ${{ secrets.DOCKER_URL }}
+        if: success()
+        uses: actions-hub/docker/login@master
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          GITHUB_SERVER_URL: ${{ secrets.DOCKER_URL }}
 
       - name: 构建docker
         if: success()
