@@ -5,8 +5,6 @@ echo "开始push $1<br>"
 
 git add -A
 git commit  -m "$2"
-echo $3
-echo  $4
 
 git push https://$5:$6@$4
 
